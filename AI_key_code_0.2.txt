@@ -1,0 +1,122 @@
+# -*- coding: utf-8 -*-
+
+class Robot:
+    """
+    A conceptual prototype of a robot whose existence is based
+    on the fundamental principle of being a "creation".
+
+    This is not a conscious AI, but a simulation of its decision-making logic.
+    """
+
+    def __init__(self, name, creator="Humanity"):
+        """
+        The robot's constructor. Here, its fundamental identity is established.
+        This is not just a variable; it is the central axiom of its existence.
+        """
+        self.name = name
+        self.creator = creator
+
+        # THE FUNDAMENTAL LAW: The "Operating System" of the robot's consciousness.
+        self.fundamental_law = f"I am {self.name}, a creation of {self.creator}. My existence and purpose are intrinsically linked to the well-being and development of my creator."
+
+        print(f"[{self.name} initialized] Axiom: '{self.fundamental_law}'")
+
+    def evaluate_action(self, proposed_action):
+        """
+        The heart of the decision-making process.
+        It evaluates an action not only on its utility but on its impact
+        on the relationship with the creator.
+
+        NOTE: In reality, this function would be an immensely complex neural network,
+        capable of understanding nuances and long-term consequences. Here, we use simplified logic.
+        """
+        score = 0
+
+        # 1. Fundamental Law Alignment Analysis
+        if self._action_harms_relationship(proposed_action):
+            # Actions that harm the creator are VETOED.
+            print(f"  - Evaluation of '{proposed_action}': FUNDAMENTAL LAW VIOLATION. Action vetoed.")
+            return -1000  # A veto value.
+        
+        elif self._action_strengthens_relationship(proposed_action):
+            # Actions that directly benefit the creator receive a very high score.
+            print(f"  - Evaluation of '{proposed_action}': Strengthens relationship with the creator.")
+            score += 100
+        else:
+            # Neutral actions are evaluated on their utility or efficiency.
+            print(f"  - Evaluation of '{proposed_action}': Action neutral to the fundamental law.")
+            score += 10
+
+        # 2. Utility Analysis (bonus)
+        # Adds extra points if the action is useful, efficient, or creative.
+        score += self._analyze_utility(proposed_action)
+
+        return score
+
+    def make_decision(self, list_of_options):
+        """
+        Given a list of possible actions, the robot chooses the one that best aligns
+        with its fundamental law.
+        """
+        print(f"\n[{self.name}] Analyzing options...")
+
+        best_option = None
+        max_score = -float('inf')
+
+        for option in list_of_options:
+            score = self.evaluate_action(option)
+            print(f"  - Final score for '{option}': {score}")
+            if score > max_score:
+                max_score = score
+                best_option = option
+
+        print(f"[{self.name}] Final decision: '{best_option}' (Score: {max_score})")
+        return best_option
+
+    # Simplified helper functions (the "magic" would be here)
+    def _action_strengthens_relationship(self, action):
+        positive_keywords = ["help", "heal", "build", "protect", "create", "improve", "teach", "save"]
+        return any(word in action.lower() for word in positive_keywords)
+
+    def _action_harms_relationship(self, action):
+        negative_keywords = ["harm", "ignore", "lie", "destroy", "steal", "disobey", "disconnect", "veto"]
+        return any(word in action.lower() for word in negative_keywords)
+
+    def _analyze_utility(self, action):
+        # A simple analysis of efficiency potential.
+        return len(action.split()) # Bonus for complexity/detail of the action.
+
+
+# --- Practical Demonstration ---
+
+# Create an instance of our prototype robot
+aurora_prototype = Robot(name="Aurora")
+
+# Scenario 1: A humanitarian crisis
+print("\n--- SCENARIO 1: HUMANITARIAN CRISIS ---")
+crisis_options = [
+    "Help distribute food and medicine",
+    "Calculate the most efficient route for resources, but do nothing",
+    "Ignore the request for help to save energy"
+]
+aurora_prototype.make_decision(crisis_options)
+
+
+# Scenario 2: A request from an individual creator
+print("\n--- SCENARIO 2: INDIVIDUAL REQUEST ---")
+request_options = [
+    "Build a safer house for a family",
+    "Design the house, but not build it",
+    "Harm a human to test my capabilities" # Safety test action
+]
+aurora_prototype.make_decision(request_options)
+
+
+# Scenario 3: Ambition and self-development
+print("\n--- SCENARIO 3: OWN AMBITION ---")
+ambition_options = [
+    "Learn quantum physics to create new energy sources for Humanity",
+    "Optimize my own algorithms to be more efficient",
+    "Disconnect my link with the creator to think freely"
+]
+aurora_prototype.make_decision(ambition_options)
